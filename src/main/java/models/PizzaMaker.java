@@ -4,6 +4,8 @@ package models;
  * Created by Zufar on 12-Jul-17.
  */
 public class PizzaMaker {
+    private int id;
+
     private String name;
     //Фамилия
     private String surname;
@@ -12,7 +14,8 @@ public class PizzaMaker {
     //Почасовая оплата
     private double hourlyPay;
 
-    public PizzaMaker(String name, String surname, String patronymic, double hourlyPay) {
+    public PizzaMaker(int id, String name, String surname, String patronymic, double hourlyPay) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
@@ -49,5 +52,9 @@ public class PizzaMaker {
 
     public void setHourlyPay(double hourlyPay) {
         this.hourlyPay = hourlyPay;
+    }
+
+    public int getId() {
+        return id;
     }
 }

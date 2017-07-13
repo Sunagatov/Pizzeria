@@ -7,17 +7,20 @@ import java.util.Date;
  * Created by Zufar on 12-Jul-17.
  */
 public class Order {
+    enum Status {
+        START, PROCESS, FINISH
+    }
+    private int id;
     private Client client;
-    private Cashier cashier;
     private Pizza pizzas;
     private PizzaMaker pizzaMaker;
     private Date startDate;
     private Date endDate;
-    private boolean status;
+    private Status status;
 
-    public Order(Client client, Cashier cashier, Pizza pizzas, PizzaMaker pizzaMaker, Date startDate, Date endDate, boolean status) {
+    public Order(Client client, Pizza pizzas, PizzaMaker pizzaMaker, Date startDate, Date endDate, Status status) {
+        this.id = id;
         this.client = client;
-        this.cashier = cashier;
         this.pizzas = pizzas;
         this.pizzaMaker = pizzaMaker;
         this.startDate = startDate;
@@ -31,14 +34,6 @@ public class Order {
 
     public void setClient(Client client) {
         this.client = client;
-    }
-
-    public Cashier getCashier() {
-        return cashier;
-    }
-
-    public void setCashier(Cashier cashier) {
-        this.cashier = cashier;
     }
 
     public Pizza getPizzas() {
@@ -73,11 +68,15 @@ public class Order {
         this.endDate = endDate;
     }
 
-    public boolean isStatus() {
+    public Status isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
     }
 }

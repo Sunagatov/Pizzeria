@@ -4,6 +4,8 @@ package models;
  * Created by Zufar on 12-Jul-17.
  */
 public class Client {
+    private int id;
+
     private String name;
     //Фамилия
     private String surname;
@@ -12,11 +14,13 @@ public class Client {
     //Номер телефона
     private int telephoneNumber;
 
-    public Client(String name, String surname, String patronymic, int telephoneNumber) {
+    public Client(int id, String name, String surname, String patronymic, int telephoneNumber) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.telephoneNumber = telephoneNumber;
+
     }
 
     public String getName() {
@@ -43,11 +47,15 @@ public class Client {
         this.patronymic = patronymic;
     }
 
-    public double getTelephoneNumber() {
+    public int getTelephoneNumber() {
         return telephoneNumber;
     }
 
     public void setTelephoneNumber(int telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
+    }
+
+    public int getId() {
+        return id;
     }
 }

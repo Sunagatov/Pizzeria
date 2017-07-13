@@ -7,7 +7,7 @@
           <element id="module-output" name="Pizzeria" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: hsqldb:hsqldb:1.8.0.10" />
+          <element id="library" level="project" name="Maven: org.hsqldb:hsqldb:2.3.4" />
         </element>
       </element>
       <element id="directory" name="META-INF">

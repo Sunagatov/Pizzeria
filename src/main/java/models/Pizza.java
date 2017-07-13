@@ -4,11 +4,13 @@ package models;
  * Created by Zufar on 12-Jul-17.
  */
 public class Pizza {
+    private int id;
     private String name;
     private double size;
     private double price;
 
     public Pizza(String name, double size, double price) {
+        this.id = id;
         this.name = name;
         this.size = size;
         this.price = price;
@@ -36,6 +38,10 @@ public class Pizza {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
     }
 }
 
