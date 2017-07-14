@@ -7,7 +7,8 @@
 </head>
 <body>
 <%
-    DAO.getInstance().getDBConnection();
+    out.println(DAO.getInstance().LoadAllClients());
+    out.println(DAO.getInstance().LoadAllPizzaMakers());
 %>
 </body>
 </html>
