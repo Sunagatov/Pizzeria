@@ -76,7 +76,7 @@ public class Order {
         this.status = status;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 }

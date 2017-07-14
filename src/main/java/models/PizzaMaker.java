@@ -54,7 +54,7 @@ public class PizzaMaker {
         this.hourlyPay = hourlyPay;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 }

@@ -40,7 +40,7 @@ public class Pizza {
         this.price = price;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 }

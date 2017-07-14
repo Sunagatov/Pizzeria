@@ -87,7 +87,6 @@ public class DAO {
         return currentClient;
     }
 
-
     public void storeClient(Client client) throws SQLException {
         String insertTableSQL = "INSERT INTO CLIENTS"
                 + "(NAME, SURNAME, PATRONYMIC, TELEPHONENUMBER) VALUES"
@@ -100,6 +99,24 @@ public class DAO {
         preparedStatement.setInt(4, client.getTelephoneNumber());
         preparedStatement.executeUpdate();
         ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
+    }
+
+    public void updateClient(int clientID, String name, String surname, String patronymic, int telephoneNumber) throws SQLException {
+        String updateTableSQL = "UPDATE CLIENTS SET NAME= ?,SURNAME= ?,PATRONYMIC= ?,TELEPHONENUMBER= ? WHERE id = ?";
+        Connection dbConnection = getDBConnection();
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, surname);
+        preparedStatement.setString(3, patronymic);
+        preparedStatement.setInt(4, telephoneNumber);
+        preparedStatement.setInt(5, clientID);
+        preparedStatement.executeUpdate();
         if (preparedStatement != null) {
             preparedStatement.close();
         }
@@ -156,6 +173,24 @@ public class DAO {
         return currentPizzaMaker;
     }
 
+    public void updatePizzaMaker(int pizzaMakerID, String name, String surname, String patronymic, int hourlypay) throws SQLException {
+        String updateTableSQL = "UPDATE CLIENTS SET NAME= ?,SURNAME= ?,PATRONYMIC= ?,TELEPHONENUMBER= ? WHERE id = ?";
+        Connection dbConnection = getDBConnection();
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, surname);
+        preparedStatement.setString(3, patronymic);
+        preparedStatement.setInt(4, hourlypay);
+        preparedStatement.setInt(5, pizzaMakerID);
+        preparedStatement.executeUpdate();
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
+    }
+
     public void storePizzaMaker(PizzaMaker pizzaMaker) throws SQLException {
         String insertTableSQL = "INSERT INTO PizzaMaker"
                 + "(NAME, SURNAME, PATRONYMIC, HOURLYPAY) VALUES"
@@ -175,4 +210,55 @@ public class DAO {
         }
     }
 
+    public Pizza loadPizza(int pizzaID) throws SQLException {
+        String selectSQL = "SELECT * FROM PIZZAS WHERE ID = ?";
+        Connection dbConnection = getDBConnection();
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(selectSQL);
+        preparedStatement.setInt(1, pizzaID);
+        ResultSet rsPizzas = preparedStatement.executeQuery();
+        Pizza currentPizza = null;
+        if (rsPizzas.next()) {
+            String name = rsPizzas.getString("NAME");
+            int size = rsPizzas.getInt("SIZE");
+            double price = rsPizzas.getInt("PRICE");
+            currentPizza = new Pizza(name, size, price);
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+        }
+        return currentPizza;
+    }
+
+    public List<Order> LoadAllOrders() throws SQLException {
+        List<Order> data = new ArrayList<Order>();
+        String selectSQL = "SELECT * FROM ORDERS";
+        Connection dbConnection = getDBConnection();
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(selectSQL);
+        ResultSet rsOrders = preparedStatement.executeQuery();
+        Order currentOrder = null;
+        while (rsOrders.next()) {
+            int orderID = rsOrders.getInt("id");
+            int clientID = rsOrders.getInt("client_id");
+            Client client = loadClient(clientID);
+            int pizzaID = rsOrders.getInt("pizza_id");
+            Pizza pizza = loadPizza(pizzaID);
+            int pizzaMakerID = rsOrders.getInt("pizzaMaker_id");
+            PizzaMaker pizzaMaker = loadPizzaMaker(pizzaMakerID);
+            //int startDate = rsOrders.getInt("startDate");
+            //int endDate = rsOrders.getInt("endDate");
+            //int status = rsOrders.getInt("status");
+            currentOrder = new Order(client, pizza, pizzaMaker, null, null, null);
+            data.add(currentOrder);
+        }
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
+        return data;
+    }
 }

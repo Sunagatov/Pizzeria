@@ -26,29 +26,35 @@
 <input class = "button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('delete')"/>
 
 
-<% if (pizzaMaker != null) {
+<%
+    String id = "";
     String name = "";
     String surname = "";
     String patronymic = "";
-    double hourlypay = 0;
-    if (pizzaMaker.getName() != null) {
-        name = pizzaMaker.getName();
-    }
-    if (pizzaMaker.getSurname() != null) {
-        surname = pizzaMaker.getSurname();
-    }
-    if (pizzaMaker.getPatronymic()!= null) {
-        patronymic = pizzaMaker.getPatronymic();
-    }
-    if (pizzaMaker.getHourlyPay() != 0) {
-        hourlypay = pizzaMaker.getHourlyPay();
+    String hourlypay =  "";
+
+    if (pizzaMaker != null) {
+        id = Double.toString(pizzaMaker.getID());
+        if (pizzaMaker.getName() != null) {
+            name = pizzaMaker.getName();
+        }
+        if (pizzaMaker.getSurname() != null) {
+            surname = pizzaMaker.getSurname();
+        }
+        if (pizzaMaker.getPatronymic()!= null) {
+            patronymic = pizzaMaker.getPatronymic();
+        }
+        if (pizzaMaker.getHourlyPay() != 0) {
+            hourlypay = Double.toString(pizzaMaker.getHourlyPay());
+        }
     }
 %>
+
 <fieldset>
-    <legend>Информация о клиенте:</legend>
+    <legend>Информация о пиццамэйкере:</legend>
     <p>
         <label>id:</label>
-        <%=pizzaMaker.getID()%><br/>
+        <%=id%><br/>
         <label>Имя:</label>
         <%=name%><br/>
         <label>Фамилия:</label>
@@ -59,9 +65,9 @@
         <%=hourlypay%><br/>
     </p>
 </fieldset>
-<%}%>
+
 <fieldset>
-    <legend>Все клиенты:</legend>
+    <legend>Все пиццамэйкеры:</legend>
     <p>
         <%
 

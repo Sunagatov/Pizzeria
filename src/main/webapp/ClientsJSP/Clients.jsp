@@ -8,7 +8,7 @@
     try {
 
         int id = Integer.parseInt(request.getParameter("id"));
-        //client = DAO.loadClient(id);
+        client = DAO.getInstance().loadClient(id);
     } catch (Exception e) {
 
     }%>
@@ -25,16 +25,19 @@
 <input class = "button" type="button" name="Schedule" value="Добавить" onclick="redirect('schedule.jsp')"/>
 <input class = "button" type="button" name="Edit" value="Редактировать" onclick="redirectWithSelectedID('edit.jsp')"/>
 <input class = "button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('delete')"/>
+<%
+String id = "";
+String name = "";
+String surname = "";
+String patronymic = "";
+long telephoneNumber = 0;
 
-
-<% if (client != null) {
-    String name = "";
-    String surname = "";
-    String patronymic = "";
-    long telephoneNumber;
+ if (client != null) {
+     id= Integer.toString(client.getID());
     if (client.getName() != null) {
         name = client.getName();
     }
+
    /* if (client.getDescription() != null) {
         description = client.getDescription();
     }
@@ -44,31 +47,29 @@
         if (client.getMessage() != null) {
             message = client.getMessage();
         }
-    }*/
+    }*/}
 %>
 <fieldset>
     <legend>Информация о клиенте:</legend>
     <p>
-        <label>id: </label>
-        <%=client.getID()%><br/>
-        <label>Имя: </label>
+        <label>id:</label>
+        <%=id%><br/>
+        <label>Имя:</label>
         <%=name%><br/>
-        <label>Время выполнения: </label>
-        <%=alertTime%><br/>
-        <label>Статус: </label>
-        <%=status%><br/>
-        <label>Описание: </label>
-        <%=description%><br/>
-        <label>Сообщение:</label>
-        <%=message%><br/>
+        <label>Фамилия:</label>
+        <%=surname%><br/>
+        <label>Отчество:</label>
+        <%=patronymic%><br/>
+        <label>Номер телефона:</label>
+        <%=telephoneNumber%><br/>
     </p>
 </fieldset>
-<%}%>
+
 <fieldset>
-    <legend>Все задачи:</legend>
+    <legend>Все клиенты:</legend>
     <p>
         <%
-            for (Task t : SQLTaskDAO.LoadAll(1)) {
+            for (Client t : DAO.getInstance().LoadAllClients()) {
                 if (client != null && client.getID() == t.getID()) {
                     out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
                 } else {

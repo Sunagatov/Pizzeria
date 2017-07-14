@@ -12,7 +12,7 @@
 %>
 <html>
 <head>
-    <title>Добавление пиццамэйкера</title>
+    <title>Добавление клиента</title>
     <link href="editStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
@@ -20,7 +20,7 @@
 
 
 <fieldset>
-    <legend>Добавление пиццамэйкера</legend>
+    <legend>Добавление клиента</legend>
     <form action="schedule" method="post">
         <% if (error != null) { %>
         <div class="error"><%=error%></div>
@@ -36,12 +36,12 @@
         <label for="patronymicID">Отчество:</label>
         <br>
         <input id="patronymicID" type="text" name="patronymic" rows="5" cols="32"
-                  maxlength="500"/>
+               maxlength="500"/>
         <br>
-        <label for="hourlyPayID">Почасовая оплата:</label>
+        <label for="telephoneNumberID">Номер телефона:</label>
         <br>
-        <input id="hourlyPayID" type="text" name="hourlyPay" rows="5" cols="32"
-                  maxlength="500"/>
+        <input id="telephoneNumberID" type="text" name="telephoneNumber" rows="5" cols="32"
+               maxlength="500"/>
         <br>
         <input class="button" type="submit" name="ok" value="       ОК      "/>
     </form>

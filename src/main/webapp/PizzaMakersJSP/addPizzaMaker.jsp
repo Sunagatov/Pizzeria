@@ -36,12 +36,12 @@
         <label for="patronymicID">Отчество:</label>
         <br>
         <input id="patronymicID" type="text" name="patronymic" rows="5" cols="32"
-                  maxlength="500"/>
+               maxlength="500"/>
         <br>
         <label for="hourlyPayID">Почасовая оплата:</label>
         <br>
         <input id="hourlyPayID" type="text" name="hourlyPay" rows="5" cols="32"
-                  maxlength="500"/>
+               maxlength="500"/>
         <br>
         <input class="button" type="submit" name="ok" value="       ОК      "/>
     </form>
