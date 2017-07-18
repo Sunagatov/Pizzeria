@@ -12,9 +12,9 @@ public class PizzaMaker {
     //Отчество
     private String patronymic;
     //Почасовая оплата
-    private double hourlyPay;
+    private int hourlyPay;
 
-    public PizzaMaker(int id, String name, String surname, String patronymic, double hourlyPay) {
+    public PizzaMaker(int id, String name, String surname, String patronymic, int hourlyPay) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -46,11 +46,11 @@ public class PizzaMaker {
         this.patronymic = patronymic;
     }
 
-    public double getHourlyPay() {
+    public int getHourlyPay() {
         return hourlyPay;
     }
 
-    public void setHourlyPay(double hourlyPay) {
+    public void setHourlyPay(int hourlyPay) {
         this.hourlyPay = hourlyPay;
     }
 

@@ -1,0 +1,35 @@
+h3 {
+    color: #A52A2A;
+    font-size: 19pt; /* Размер заголовка */
+}
+
+legend {
+    color: #A52A2A;
+    font-size: 14pt;
+    text-decoration: underline;
+}
+
+label {
+    color: #A52A2A;
+    font-weight: bold; /* Жирный шрифт */
+}
+
+body {
+    font-family: Book Antiqua, Bookshelf, Arial, Verdana; /* Семейство шрифтов */
+    font-size: 12pt; /* Размер основного шрифта в пунктах */
+    background-color: #FFF5EE; /* Цвет фона веб-страницы */
+    color: #CD5C5C; /* Цвет основного текста */
+}
+
+.button {
+    border-radius: 10px; /* Радиус границы */
+    background-color: #FFF5EE; /* Цвет фона */
+    font-size: 12px;
+    padding: 4px 5px; /* Отступы */
+    width: 120px;
+}
+
+.button:hover {
+    background-color: #F6A5A5;
+}
+

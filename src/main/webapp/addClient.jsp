@@ -12,7 +12,7 @@
 %>
 <html>
 <head>
-    <title>Добавление пиццамэйкера</title>
+    <title>Добавление клиента</title>
     <link href="editStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
@@ -20,8 +20,8 @@
 
 
 <fieldset>
-    <legend>Добавление пиццамэйкера</legend>
-    <form action="schedule" method="post">
+    <legend>Добавление клиента</legend>
+    <form action="addClient" method="post">
         <% if (error != null) { %>
         <div class="error"><%=error%></div>
         <% } %>
@@ -38,13 +38,20 @@
         <input id="patronymicID" type="text" name="patronymic" rows="5" cols="32"
                maxlength="500"/>
         <br>
-        <label for="hourlyPayID">Почасовая оплата:</label>
+        <label for="telephoneNumberID">Номер телефона:</label>
         <br>
-        <input id="hourlyPayID" type="text" name="hourlyPay" rows="5" cols="32"
+        <input id="telephoneNumberID" type="text" name="telephoneNumber" rows="5" cols="32"
                maxlength="500"/>
         <br>
-        <input class="button" type="submit" name="ok" value="       ОК      "/>
+        <input class="button" type="submit" name="ok" id="ok" value="ОК" onclick=""/>
+        <input class="button" type="button" name="cancel" id="cancel" value="Отменить" onclick="redirect('clients.jsp')"/>
     </form>
 </fieldset>
+
+<script>
+    function redirect(page) {
+        window.location = page;
+    }
+</script>
 </body>
 </html>

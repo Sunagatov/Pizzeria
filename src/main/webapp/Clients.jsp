@@ -15,39 +15,38 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Главная страница</title>
+    <title>Клиенты</title>
     <link href="indexStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
 <body>
-<h3 id="header">Главная страница</h3>
+<h3 id="header">Клиенты</h3>
 
-<input class = "button" type="button" name="Schedule" value="Добавить" onclick="redirect('schedule.jsp')"/>
-<input class = "button" type="button" name="Edit" value="Редактировать" onclick="redirectWithSelectedID('edit.jsp')"/>
-<input class = "button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('delete')"/>
+
+<input class="button" type="button" name="Orders" value="Заказы" onclick="redirect('index.jsp')"/>
+<input class="button" type="button" name="PizzaMakers" value="Пиццамейкеры" onclick="redirect('pizzaMakers.jsp')"/>
 <%
-String id = "";
-String name = "";
-String surname = "";
-String patronymic = "";
-long telephoneNumber = 0;
+    String id = "";
+    String name = "";
+    String surname = "";
+    String patronymic = "";
+    String telephoneNumber = "";
 
- if (client != null) {
-     id= Integer.toString(client.getID());
-    if (client.getName() != null) {
-        name = client.getName();
-    }
-
-   /* if (client.getDescription() != null) {
-        description = client.getDescription();
-    }
-    if (client.getAlertTime() != null) {
-        alertTime = client.getAlertTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
-        status = true;
-        if (client.getMessage() != null) {
-            message = client.getMessage();
+    if (client != null) {
+        id = Integer.toString(client.getID());
+        if (client.getName() != null) {
+            name = client.getName();
         }
-    }*/}
+        if (client.getSurname() != null) {
+            surname = client.getSurname();
+        }
+        if (client.getPatronymic() != null) {
+            patronymic = client.getPatronymic();
+        }
+
+            telephoneNumber = Integer.toString(client.getTelephoneNumber());
+
+    }
 %>
 <fieldset>
     <legend>Информация о клиенте:</legend>
@@ -63,6 +62,10 @@ long telephoneNumber = 0;
         <label>Номер телефона:</label>
         <%=telephoneNumber%><br/>
     </p>
+
+    <input class="button" type="button" name="Add" value="Добавить" onclick="redirect('addClient.jsp')"/>
+    <input class="button" type="button" name="Edit" value="Редактировать" onclick="redirectWithSelectedID('editClient.jsp')"/>
+    <input class="button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('deleteClient')"/>
 </fieldset>
 
 <fieldset>
@@ -71,9 +74,9 @@ long telephoneNumber = 0;
         <%
             for (Client t : DAO.getInstance().LoadAllClients()) {
                 if (client != null && client.getID() == t.getID()) {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('clients.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
                 } else {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('clients.jsp', " + t.getID() + ")\"/>");
                 }
                 out.println("<td><strong style=\"color:#A52A2A\";>" + t.getID() + "</strong></td>");
                 out.println("<td>" + t.getName() + "</td></br>");

@@ -9,7 +9,7 @@ public class Pizza {
     private double size;
     private double price;
 
-    public Pizza(String name, double size, double price) {
+    public Pizza(int id, String name, double size, double price) {
         this.id = id;
         this.name = name;
         this.size = size;

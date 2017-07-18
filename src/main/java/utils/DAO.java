@@ -3,6 +3,8 @@ package utils;
 import models.*;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,8 +99,8 @@ public class DAO {
         preparedStatement.setString(2, client.getSurname());
         preparedStatement.setString(3, client.getPatronymic());
         preparedStatement.setInt(4, client.getTelephoneNumber());
+        System.out.println(preparedStatement.toString());
         preparedStatement.executeUpdate();
-        ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
         if (preparedStatement != null) {
             preparedStatement.close();
         }
@@ -125,6 +127,20 @@ public class DAO {
         }
     }
 
+    public void deleteClient(int clientID) throws SQLException {
+        Connection dbConnection = getDBConnection();
+        String deleteSQL = "DELETE FROM CLIENTS WHERE ID = ?";
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(deleteSQL);
+        preparedStatement.setInt(1, clientID);
+        preparedStatement.executeUpdate();
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
+    }
+
     public List<PizzaMaker> LoadAllPizzaMakers() throws SQLException {
         List<PizzaMaker> data = new ArrayList<PizzaMaker>();
         String selectSQL = "SELECT * FROM PIZZAMAKERS";
@@ -137,7 +153,7 @@ public class DAO {
             String name = rsPizzaMakers.getString("NAME");
             String surname = rsPizzaMakers.getString("SURNAME");
             String patronymic = rsPizzaMakers.getString("PATRONYMIC");
-            double hourlypay = rsPizzaMakers.getDouble("HOURLYPAY");
+            int hourlypay = rsPizzaMakers.getInt("HOURLYPAY");
             currentPizzaMaker = new PizzaMaker(pizzaMakerID, name, surname, patronymic, hourlypay);
             data.add(currentPizzaMaker);
         }
@@ -161,7 +177,7 @@ public class DAO {
             String name = rsPizzaMakers.getString("NAME");
             String surname = rsPizzaMakers.getString("SURNAME");
             String patronymic = rsPizzaMakers.getString("PATRONYMIC");
-            double hourlypay = rsPizzaMakers.getDouble("HOURLYPAY");
+            int hourlypay = rsPizzaMakers.getInt("HOURLYPAY");
             currentPizzaMaker = new PizzaMaker(pizzaMakerID, name, surname, patronymic, hourlypay);
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -174,7 +190,7 @@ public class DAO {
     }
 
     public void updatePizzaMaker(int pizzaMakerID, String name, String surname, String patronymic, int hourlypay) throws SQLException {
-        String updateTableSQL = "UPDATE CLIENTS SET NAME= ?,SURNAME= ?,PATRONYMIC= ?,TELEPHONENUMBER= ? WHERE id = ?";
+        String updateTableSQL = "UPDATE PIZZAMAKERS SET NAME= ?,SURNAME= ?,PATRONYMIC= ?,HOURLYPAY= ? WHERE id = ?";
         Connection dbConnection = getDBConnection();
         PreparedStatement preparedStatement = dbConnection.prepareStatement(updateTableSQL);
         preparedStatement.setString(1, name);
@@ -192,7 +208,7 @@ public class DAO {
     }
 
     public void storePizzaMaker(PizzaMaker pizzaMaker) throws SQLException {
-        String insertTableSQL = "INSERT INTO PizzaMaker"
+        String insertTableSQL = "INSERT INTO PIZZAMAKERS"
                 + "(NAME, SURNAME, PATRONYMIC, HOURLYPAY) VALUES"
                 + "(?,?,?,?)";
         Connection dbConnection = getDBConnection();
@@ -210,6 +226,44 @@ public class DAO {
         }
     }
 
+    public void deletePizzaMaker(int pizzaMakerID) throws SQLException {
+        Connection dbConnection = getDBConnection();
+        String deleteSQL = "DELETE FROM PIZZAMAKERS WHERE ID = ?";
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(deleteSQL);
+        preparedStatement.setInt(1, pizzaMakerID);
+        preparedStatement.executeUpdate();
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
+    }
+
+    public List<Pizza> loadAllPizzas() throws SQLException {
+        String selectSQL = "SELECT * FROM PIZZAS";
+        Connection dbConnection = getDBConnection();
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(selectSQL);
+        ResultSet rsPizzas = preparedStatement.executeQuery();
+        List<Pizza> data = new ArrayList<Pizza>();
+        Pizza currentPizza = null;
+        while (rsPizzas.next()) {
+            int pizzaID = rsPizzas.getInt("id");
+            String name = rsPizzas.getString("NAME");
+            int size = rsPizzas.getInt("SIZE");
+            double price = rsPizzas.getInt("PRICE");
+            currentPizza = new Pizza(pizzaID, name, size, price);
+            data.add(currentPizza);
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+        }
+        return data;
+    }
+
     public Pizza loadPizza(int pizzaID) throws SQLException {
         String selectSQL = "SELECT * FROM PIZZAS WHERE ID = ?";
         Connection dbConnection = getDBConnection();
@@ -221,7 +275,7 @@ public class DAO {
             String name = rsPizzas.getString("NAME");
             int size = rsPizzas.getInt("SIZE");
             double price = rsPizzas.getInt("PRICE");
-            currentPizza = new Pizza(name, size, price);
+            currentPizza = new Pizza(pizzaID, name, size, price);
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
@@ -247,10 +301,11 @@ public class DAO {
             Pizza pizza = loadPizza(pizzaID);
             int pizzaMakerID = rsOrders.getInt("pizzaMaker_id");
             PizzaMaker pizzaMaker = loadPizzaMaker(pizzaMakerID);
-            //int startDate = rsOrders.getInt("startDate");
-            //int endDate = rsOrders.getInt("endDate");
-            //int status = rsOrders.getInt("status");
-            currentOrder = new Order(client, pizza, pizzaMaker, null, null, null);
+            String format = rsOrders.getTimestamp("startDate").toLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            LocalDateTime startDate = LocalDateTime.parse(format, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            format = rsOrders.getTimestamp("endDate").toLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            LocalDateTime endDate = LocalDateTime.parse(format, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            currentOrder = new Order(orderID, client, pizza, pizzaMaker, startDate, endDate, Order.Status.START);
             data.add(currentOrder);
         }
         if (preparedStatement != null) {
@@ -260,5 +315,91 @@ public class DAO {
             dbConnection.close();
         }
         return data;
+    }
+
+    public Order loadOrder(int id) throws SQLException {
+        String selectSQL = "SELECT * FROM ORDERS WHERE ID = ?";
+        Connection dbConnection = getDBConnection();
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(selectSQL);
+        preparedStatement.setInt(1, id);
+        ResultSet rsOrders = preparedStatement.executeQuery();
+        Order currentOrder = null;
+        if (rsOrders.next()) {
+            int orderID = rsOrders.getInt("id");
+            int clientID = rsOrders.getInt("client_id");
+            Client client = loadClient(clientID);
+            int pizzaID = rsOrders.getInt("pizza_id");
+            Pizza pizza = loadPizza(pizzaID);
+            int pizzaMakerID = rsOrders.getInt("pizzaMaker_id");
+            PizzaMaker pizzaMaker = loadPizzaMaker(pizzaMakerID);
+            String format = rsOrders.getTimestamp("startDate").toLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            LocalDateTime startDate = LocalDateTime.parse(format, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            format = rsOrders.getTimestamp("endDate").toLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            LocalDateTime endDate = LocalDateTime.parse(format, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            currentOrder = new Order(orderID, client, pizza, pizzaMaker, startDate, endDate, Order.Status.START);
+        }
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
+        return currentOrder;
+    }
+
+    public void storeOrder(int clientID, int pizzaID, int pizzaMakerID, LocalDateTime startDate, LocalDateTime endDate, Order.Status status) throws SQLException {
+        String insertTableSQL = "INSERT INTO ORDERS"
+                + "(CLIENT_ID, PIZZA_ID, PIZZAMAKER_ID, STARTDATE, ENDDATE, STATUS) VALUES"
+                + "(?,?,?,?,?,?)";
+        Connection dbConnection = getDBConnection();
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+        preparedStatement.setInt(1, clientID);
+        preparedStatement.setInt(2, pizzaID);
+        preparedStatement.setInt(3, pizzaMakerID);
+        preparedStatement.setTimestamp(4, Timestamp.valueOf(startDate));
+        preparedStatement.setTimestamp(5, Timestamp.valueOf(endDate));
+        preparedStatement.setInt(6, status.ordinal());
+        preparedStatement.executeUpdate();
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
+    }
+
+    public void updateOrder(int orderID, int clientID, int pizzaID, int pizzaMakeriD, LocalDateTime startDate, LocalDateTime endDate, Order.Status status) throws SQLException {
+        String updateTableSQL = "UPDATE ORDERS SET CLIENT_ID= ?,PIZZA_ID= ?,PIZZAMAKER_ID= ?,STARTDATE= ?,ENDDATE= ?, STATUS = ? WHERE id = ?";
+        Connection dbConnection = getDBConnection();
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+        preparedStatement.setInt(1, clientID);
+        preparedStatement.setInt(2, pizzaID);
+        preparedStatement.setInt(3, pizzaMakeriD);
+        preparedStatement.setTimestamp(4, Timestamp.valueOf(startDate));
+        preparedStatement.setTimestamp(5, Timestamp.valueOf(endDate));
+        preparedStatement.setInt(6, status.ordinal());
+        preparedStatement.setInt(7, orderID);
+        preparedStatement.executeUpdate();
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
+    }
+
+    public void deleteOrder(int orderID) throws SQLException {
+        Connection dbConnection = getDBConnection();
+        String deleteSQL = "DELETE FROM ORDERS WHERE ID = ?";
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(deleteSQL);
+        preparedStatement.setInt(1, orderID);
+        preparedStatement.executeUpdate();
+        preparedStatement.executeUpdate();
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
     }
 }

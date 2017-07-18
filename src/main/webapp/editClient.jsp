@@ -45,7 +45,7 @@
 <body>
 <fieldset>
     <legend>Редактирование информации о клиенте:</legend>
-    <form action="edit" method="post">
+    <form action="editClient" method="post">
         <% if (error != null) { %>
         <div class="error"><%=error%></div>
         <% } %>
@@ -69,8 +69,14 @@
                   maxlength="500"><%=telephoneNumber%></textarea>
         <br>
         <input class="button" type="submit" name="ok" value="       ОК      "/>
+        <input class="button" type="button" name="cancel" id="ok" value="Отменить" onclick="redirect('clients.jsp')"/>
     </form>
 </fieldset>
 <%}%>
+<script>
+    function redirect(page) {
+        window.location = page;
+    }
+</script>
 </body>
 </html>

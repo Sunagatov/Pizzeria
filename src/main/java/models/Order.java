@@ -1,24 +1,25 @@
 package models;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * Created by Zufar on 12-Jul-17.
  */
 public class Order {
-    enum Status {
+    public static enum Status {
         START, PROCESS, FINISH
     }
     private int id;
     private Client client;
     private Pizza pizzas;
     private PizzaMaker pizzaMaker;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private Status status;
 
-    public Order(Client client, Pizza pizzas, PizzaMaker pizzaMaker, Date startDate, Date endDate, Status status) {
+    public Order(int id, Client client, Pizza pizzas, PizzaMaker pizzaMaker, LocalDateTime startDate, LocalDateTime endDate, Status status) {
         this.id = id;
         this.client = client;
         this.pizzas = pizzas;
@@ -36,11 +37,11 @@ public class Order {
         this.client = client;
     }
 
-    public Pizza getPizzas() {
+    public Pizza getPizza() {
         return pizzas;
     }
 
-    public void setPizzas(Pizza pizzas) {
+    public void setPizza(Pizza pizzas) {
         this.pizzas = pizzas;
     }
 
@@ -52,23 +53,23 @@ public class Order {
         this.pizzaMaker = pizzaMaker;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
-    public Status isStatus() {
+    public Status getStatus() {
         return status;
     }
 

@@ -19,7 +19,7 @@
     String name = "";
     String surname = "";
     String patronymic = "";
-    double hourlyPay = 0;
+    String hourlyPay = "";
     if (pizzaMaker != null) {
         if (pizzaMaker.getName() != null) {
             name = pizzaMaker.getName();
@@ -30,9 +30,8 @@
         if (pizzaMaker.getPatronymic() != null) {
             patronymic = pizzaMaker.getSurname();
         }
-        if (pizzaMaker.getHourlyPay() != 0) {
-            hourlyPay = pizzaMaker.getHourlyPay();
-        }
+        hourlyPay = Integer.toString(pizzaMaker.getHourlyPay());
+
 %>
 
 <html>
@@ -44,7 +43,7 @@
 <body>
 <fieldset>
     <legend>Редактирование информации о пиццамэйкере:</legend>
-    <form action="edit" method="post">
+    <form action="editPizzaMaker" method="post">
         <% if (error != null) { %>
         <div class="error"><%=error%></div>
         <% } %>
@@ -59,17 +58,21 @@
         <br>
         <label for="patronymicID">Отчество:</label>
         <br>
-        <textarea id="patronymicID" type="text" name="patronymic" rows="5" cols="32"
-                  maxlength="500"><%=patronymic%></textarea>
+        <textarea id="patronymicID" type="text" name="patronymic" rows="5" cols="32" maxlength="500"><%=patronymic%></textarea>
         <br>
-        <label for="telephoneNumberID">Почасовая оплата:</label>
+        <label for="hourlyPayID">Почасовая оплата:</label>
         <br>
-        <textarea id="telephoneNumberID" type="text" name="telephoneNumber" rows="5" cols="32"
-                  maxlength="500"><%=hourlyPay%></textarea>
+        <textarea id="hourlyPayID" type="text" name="hourlyPay" rows="5" cols="32" maxlength="500"><%=hourlyPay%></textarea>
         <br>
         <input class="button" type="submit" name="ok" value="       ОК      "/>
+        <input class="button" type="button" name="cancel" id="ok" value="Отменить" onclick="redirect('pizzaMakers.jsp')"/>
     </form>
 </fieldset>
 <%}%>
+<script>
+    function redirect(page) {
+        window.location = page;
+    }
+</script>
 </body>
 </html>

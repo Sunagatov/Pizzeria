@@ -1,0 +1,63 @@
+legend {
+    color: #A52A2A;
+    font-size: 19pt;
+}
+
+body {
+    font-family: Book Antiqua, Bookshelf, Arial, Verdana; /* Семейство шрифтов */
+    font-size: 12pt; /* Размер основного шрифта в пунктах */
+    background-color: #FFF5EE; /* Цвет фона веб-страницы */
+    color: #CD5C5C; /* Цвет основного текста */
+}
+
+label {
+    color: #A52A2A;
+    font-weight: bold;
+}
+
+.button {
+    border-radius: 10px; /* Радиус границы */
+    background-color: #FFF5EE; /* Цвет фона */
+    font-size: 12px;
+    padding: 4px 5px;
+    width: 120px;
+}
+
+.button:hover {
+    background-color: #F6A5A5;
+}
+
+input, textarea {
+    padding: 5px 7px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.error {
+    text-decoration: blink;
+    color: #CE1F1F;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+select {
+    padding:5px 7px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:5px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #CD5C5C inset;
+    background: #FFF5EE;
+    color:#CE1F1F;
+    border:none;
+    outline:none;
+    width: 300px;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}

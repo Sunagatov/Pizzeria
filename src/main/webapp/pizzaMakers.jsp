@@ -21,17 +21,15 @@
 <body>
 <h3 id="header">Пиццамэйкеры</h3>
 
-<input class = "button" type="button" name="Schedule" value="Добавить" onclick="redirect('schedule.jsp')"/>
-<input class = "button" type="button" name="Edit" value="Редактировать" onclick="redirectWithSelectedID('edit.jsp')"/>
-<input class = "button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('delete')"/>
 
-
+<input class="button" type="button" name="Clients" value="Клиенты" onclick="redirect('clients.jsp')"/>
+<input class="button" type="button" name="Orders" value="Заказы" onclick="redirect('index.jsp')"/>
 <%
     String id = "";
     String name = "";
     String surname = "";
     String patronymic = "";
-    String hourlypay =  "";
+    String hourlyPay = "";
 
     if (pizzaMaker != null) {
         id = Double.toString(pizzaMaker.getID());
@@ -41,12 +39,10 @@
         if (pizzaMaker.getSurname() != null) {
             surname = pizzaMaker.getSurname();
         }
-        if (pizzaMaker.getPatronymic()!= null) {
+        if (pizzaMaker.getPatronymic() != null) {
             patronymic = pizzaMaker.getPatronymic();
         }
-        if (pizzaMaker.getHourlyPay() != 0) {
-            hourlypay = Double.toString(pizzaMaker.getHourlyPay());
-        }
+        hourlyPay = Integer.toString(pizzaMaker.getHourlyPay());
     }
 %>
 
@@ -62,10 +58,13 @@
         <label>Отчество:</label>
         <%=patronymic%><br/>
         <label>Почасовая оплата:</label>
-        <%=hourlypay%><br/>
+        <%=hourlyPay%><br/>
     </p>
-</fieldset>
 
+    <input class="button" type="button" name="Add" value="Добавить" onclick="redirect('addPizzaMaker.jsp')"/>
+    <input class="button" type="button" name="Edit" value="Редактировать" onclick="redirectWithSelectedID('editPizzaMaker.jsp')"/>
+    <input class="button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('deletePizzaMaker')"/>
+</fieldset>
 <fieldset>
     <legend>Все пиццамэйкеры:</legend>
     <p>
@@ -73,9 +72,9 @@
 
             for (PizzaMaker t : DAO.getInstance().LoadAllPizzaMakers()) {
                 if (pizzaMaker != null && pizzaMaker.getID() == t.getID()) {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('pizzaMakers.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
                 } else {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('pizzaMakers.jsp', " + t.getID() + ")\"/>");
                 }
                 out.println("<td><strong style=\"color:#A52A2A\";>" + t.getID() + "</strong></td>");
                 out.println("<td>" + t.getName() + "</td></br>");
