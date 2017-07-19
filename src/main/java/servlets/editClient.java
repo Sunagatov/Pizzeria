@@ -28,10 +28,10 @@ public class EditClient extends HttpServlet {
             //Если ошибки нет,то обновляем инфу о клиенте
             if (error == null) {
                 DAO.getInstance().updateClient(clientID, name, surname, patronymic, Integer.parseInt(request.getParameter("telephoneNumber")));
-                response.sendRedirect("clients.jsp");
+                response.sendRedirect("Clients.jsp");
             } else {
                 request.getSession().setAttribute("error", error);
-                response.sendRedirect("editClient.jsp" + "?id=" + clientID);
+                response.sendRedirect("EditClient.jsp" + "?id=" + clientID);
             }
         } catch (SQLException e) {
             e.printStackTrace();

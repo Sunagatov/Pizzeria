@@ -28,10 +28,10 @@ public class AddClient extends HttpServlet {
             //Если ошибки нет,то обновляем инфу о клиенте
             if (error == null) {
                 DAO.getInstance().storeClient(new Client(4534, name, surname, patronymic, Integer.parseInt(request.getParameter("telephoneNumber"))));
-                response.sendRedirect("clients.jsp");
+                response.sendRedirect("Clients.jsp");
             } else {
                 request.getSession().setAttribute("error", error);
-                response.sendRedirect("addClient.jsp");
+                response.sendRedirect("AddClient.jsp");
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -19,7 +19,7 @@
 <html>
 <head>
     <title>Добавление заказа</title>
-    <link href="editStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="EditStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
 <body>

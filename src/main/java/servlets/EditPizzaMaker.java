@@ -29,10 +29,10 @@ public class EditPizzaMaker extends HttpServlet {
             //Если ошибки нет,то обновляем инфу о клиенте
             if (error == null) {
                 DAO.getInstance().updatePizzaMaker(pizzaMakerID, name, surname, patronymic, Integer.parseInt(request.getParameter("hourlyPay")));
-                response.sendRedirect("pizzaMakers.jsp");
+                response.sendRedirect("PizzaMakers.jsp");
             } else {
                 request.getSession().setAttribute("error", error);
-                response.sendRedirect("editPizzaMaker.jsp" + "?id=" + pizzaMakerID);
+                response.sendRedirect("EditPizzaMaker.jsp" + "?id=" + pizzaMakerID);
             }
         } catch (SQLException e) {
             e.printStackTrace();

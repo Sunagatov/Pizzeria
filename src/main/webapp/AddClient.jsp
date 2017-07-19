@@ -13,7 +13,7 @@
 <html>
 <head>
     <title>Добавление клиента</title>
-    <link href="editStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="EditStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
 <body>
@@ -44,7 +44,7 @@
                maxlength="500"/>
         <br>
         <input class="button" type="submit" name="ok" id="ok" value="ОК" onclick=""/>
-        <input class="button" type="button" name="cancel" id="cancel" value="Отменить" onclick="redirect('clients.jsp')"/>
+        <input class="button" type="button" name="cancel" id="cancel" value="Отменить" onclick="redirect('Clients.jsp')"/>
     </form>
 </fieldset>
 

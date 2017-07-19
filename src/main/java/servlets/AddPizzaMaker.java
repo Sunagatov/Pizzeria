@@ -28,10 +28,10 @@ public class AddPizzaMaker extends HttpServlet {
             //Если ошибки нет,то обновляем инфу о клиенте
             if (error == null) {
                 DAO.getInstance().storePizzaMaker(new PizzaMaker(4534, name, surname, patronymic, Integer.parseInt(hourlyPay)));
-                response.sendRedirect("pizzaMakers.jsp");
+                response.sendRedirect("PizzaMakers.jsp");
             } else {
                 request.getSession().setAttribute("error", error);
-                response.sendRedirect("addPizzaMaker.jsp");
+                response.sendRedirect("AddPizzaMaker.jsp");
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -15,14 +15,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Пиццамэйкеры</title>
-    <link href="indexStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="IndexStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
 <body>
 <h3 id="header">Пиццамэйкеры</h3>
 
 
-<input class="button" type="button" name="Clients" value="Клиенты" onclick="redirect('clients.jsp')"/>
+<input class="button" type="button" name="Clients" value="Клиенты" onclick="redirect('Clients.jsp')"/>
 <input class="button" type="button" name="Orders" value="Заказы" onclick="redirect('index.jsp')"/>
 <%
     String id = "";
@@ -61,8 +61,8 @@
         <%=hourlyPay%><br/>
     </p>
 
-    <input class="button" type="button" name="Add" value="Добавить" onclick="redirect('addPizzaMaker.jsp')"/>
-    <input class="button" type="button" name="Edit" value="Редактировать" onclick="redirectWithSelectedID('editPizzaMaker.jsp')"/>
+    <input class="button" type="button" name="Add" value="Добавить" onclick="redirect('AddPizzaMaker.jsp')"/>
+    <input class="button" type="button" name="Edit" value="Редактировать" onclick="redirectWithSelectedID('EditPizzaMaker.jsp')"/>
     <input class="button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('deletePizzaMaker')"/>
 </fieldset>
 <fieldset>
@@ -72,9 +72,9 @@
 
             for (PizzaMaker t : DAO.getInstance().LoadAllPizzaMakers()) {
                 if (pizzaMaker != null && pizzaMaker.getID() == t.getID()) {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('pizzaMakers.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('PizzaMakers.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
                 } else {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('pizzaMakers.jsp', " + t.getID() + ")\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('PizzaMakers.jsp', " + t.getID() + ")\"/>");
                 }
                 out.println("<td><strong style=\"color:#A52A2A\";>" + t.getID() + "</strong></td>");
                 out.println("<td>" + t.getName() + "</td></br>");

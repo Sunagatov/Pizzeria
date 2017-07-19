@@ -17,15 +17,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Главная страница</title>
-    <link href="indexStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="IndexStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
 <body>
 <h3 id="header">Главная страница</h3>
 
 
-<input class="button" type="button" name="Clients" value="Клиенты" onclick="redirect('clients.jsp')"/>
-<input class="button" type="button" name="PizzaMakers" value="Пиццамейкеры" onclick="redirect('pizzaMakers.jsp')"/>
+<input class="button" type="button" name="Clients" value="Клиенты" onclick="redirect('Clients.jsp')"/>
+<input class="button" type="button" name="PizzaMakers" value="Пиццамейкеры" onclick="redirect('PizzaMakers.jsp')"/>
 <%
     String idOrder = "";
     String pizzaName = "";
@@ -90,9 +90,9 @@
         <label>Статус:</label>
         <%=status%><br/>
     </p>
-    <input class="button" type="button" name="Add" value="Добавить" onclick="redirect('addOrder.jsp')"/>
+    <input class="button" type="button" name="Add" value="Добавить" onclick="redirect('AddOrder.jsp')"/>
     <input class="button" type="button" name="Edit" value="Редактировать"
-           onclick="redirectWithSelectedID('editOrder.jsp')"/>
+           onclick="redirectWithSelectedID('EditOrder.jsp')"/>
     <input class="button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('deleteOrder')"/>
 </fieldset>
 
@@ -103,9 +103,9 @@
         <%
             for (Order t : DAO.getInstance().LoadAllOrders()) {
                 if (order != null && order.getID() == t.getID()) {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('Index.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
                 } else {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('Index.jsp', " + t.getID() + ")\"/>");
                 }
                 out.println("<td><strong style=\"color:#A52A2A\";>" + t.getID() + "</strong></td>");
                 out.println("<td>" + "<strong style=\"color:#A52A2A\";>пицца - </strong></td>" +

@@ -37,7 +37,7 @@
 <html>
 <head>
     <title>Редактирование информации о пиццамэйкере</title>
-    <link href="editStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="EditStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
 <body>
@@ -65,7 +65,7 @@
         <textarea id="hourlyPayID" type="text" name="hourlyPay" rows="5" cols="32" maxlength="500"><%=hourlyPay%></textarea>
         <br>
         <input class="button" type="submit" name="ok" value="       ОК      "/>
-        <input class="button" type="button" name="cancel" id="ok" value="Отменить" onclick="redirect('pizzaMakers.jsp')"/>
+        <input class="button" type="button" name="cancel" id="ok" value="Отменить" onclick="redirect('PizzaMakers.jsp')"/>
     </form>
 </fieldset>
 <%}%>

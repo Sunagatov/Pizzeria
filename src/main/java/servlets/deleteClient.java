@@ -22,7 +22,7 @@ public class DeleteClient extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("clients.jsp");
+        response.sendRedirect("Clients.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

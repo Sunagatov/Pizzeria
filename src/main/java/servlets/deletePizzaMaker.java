@@ -22,7 +22,7 @@ public class DeletePizzaMaker extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("pizzaMakers.jsp");
+        response.sendRedirect("PizzaMakers.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

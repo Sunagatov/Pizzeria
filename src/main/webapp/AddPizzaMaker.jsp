@@ -13,7 +13,7 @@
 <html>
 <head>
     <title>Добавление пиццамэйкера</title>
-    <link href="editStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="EditStyle.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}icon.ico" type="image/x-icon">
 </head>
 <body>
@@ -43,7 +43,7 @@
                maxlength="500"/>
         <br>
         <input class="button" type="submit" name="ok" id="ok" value="       ОК      " onclick=""/>
-        <input class="button" type="button" name="cancel" id="ok" value="Отменить" onclick="redirect('pizzaMakers.jsp')"/>
+        <input class="button" type="button" name="cancel" id="ok" value="Отменить" onclick="redirect('PizzaMakers.jsp')"/>
     </form>
 </fieldset>
 <script>

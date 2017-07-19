@@ -43,5 +43,18 @@ public class Pizza {
     public int getID() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append( " Name: " );
+        builder.append( getName() );
+        builder.append( " Size: ");
+        builder.append( getSize() );
+        builder.append( " Price: ");
+        builder.append( getPrice() );
+        return builder.toString();
+    }
+
 }
 
