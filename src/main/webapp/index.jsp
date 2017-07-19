@@ -91,8 +91,7 @@
         <%=status%><br/>
     </p>
     <input class="button" type="button" name="Add" value="Добавить" onclick="redirect('AddOrder.jsp')"/>
-    <input class="button" type="button" name="Edit" value="Редактировать"
-           onclick="redirectWithSelectedID('EditOrder.jsp')"/>
+    <input class="button" type="button" name="Edit" value="Редактировать"onclick="redirectWithSelectedID('EditOrder.jsp')"/>
     <input class="button" type="button" name="Delete" value="Удалить" onclick="redirectWithSelectedID('deleteOrder')"/>
 </fieldset>
 
