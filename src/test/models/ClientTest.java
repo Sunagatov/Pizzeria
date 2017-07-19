@@ -1,5 +1,7 @@
-import models.Client;
+package models;
+
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,26 +27,26 @@ public class ClientTest {
     public void checkName() throws Exception {
         String expected = "Honey";
         String actual = client.getName();
-        assertEquals("Unexpected string value", expected, actual);
+        Assert.assertEquals("Unexpected string value", expected, actual);
     }
 
     @Test
     public void checkID() throws Exception {
-        assertNotNull(client.getID());
+        Assert.assertNotNull(client.getID());
     }
 
     @Test
     public void checkTelephoneNumber() throws Exception {
         int expected = 543634;
         int actual = client.getTelephoneNumber();
-        assertEquals("Unexpected int value", expected, actual);
+        Assert.assertEquals("Unexpected int value", expected, actual);
     }
 
     @Test
     public void checkToString() throws Exception {
         String expected = " Name: Honey Surname: Senny Patronymic: Rurry";
         String actual = client.toString();
-        assertEquals("Unexpected string value", expected, actual);
+        Assert.assertEquals("Unexpected string value", expected, actual);
     }
 
 }
