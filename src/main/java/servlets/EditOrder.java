@@ -37,7 +37,7 @@ public class EditOrder extends HttpServlet {
                 int idPizzaMakerINT = Integer.parseInt(idPizzaMaker);
                 int idOrderINT = Integer.parseInt(idOrder);
                 DAO.getInstance().updateOrder(idOrderINT, idClientINT, idPizzaINT, idPizzaMakerINT, start, end, Order.Status.START);
-                response.sendRedirect("Index.jsp");
+                response.sendRedirect("index.jsp");
             } else {
                 request.getSession().setAttribute("error", error);
                 response.sendRedirect("EditOrder.jsp" + "?id=" + idOrder);

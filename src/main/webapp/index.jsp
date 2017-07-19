@@ -103,9 +103,9 @@
         <%
             for (Order t : DAO.getInstance().LoadAllOrders()) {
                 if (order != null && order.getID() == t.getID()) {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('Index.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\"  value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\" checked=\"checked\"/>");
                 } else {
-                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('Index.jsp', " + t.getID() + ")\"/>");
+                    out.println("<tr><td><input type=\"radio\" name=\"t\" value=\"" + t.getID() + "\" onclick=\"redirectWithID('index.jsp', " + t.getID() + ")\"/>");
                 }
                 out.println("<td><strong style=\"color:#A52A2A\";>" + t.getID() + "</strong></td>");
                 out.println("<td>" + "<strong style=\"color:#A52A2A\";>пицца - </strong></td>" +
